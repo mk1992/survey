@@ -12,6 +12,7 @@ block content
       th 질문유형
       th content
       th time
+      th
     each comment in comments
       tr
         case comment.type
@@ -25,6 +26,9 @@ block content
         td
           input(type='text')
         td= moment(survey.createdAt).format('YYYY-MM-DD HH:mm:ss')
+        td 
+          button.btn-default(type='button' name='edit') 수정
+          button.btn-default(type='button' name='delate') 삭제
               
   form.form-inline(action='/survey/' + survey._id + '/comments', method='POST')
     .form-group
