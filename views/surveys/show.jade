@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  h1= survey.title
+  h3 by #{survey.email}
+  .well= survey.content
+  
+  hr
+  h3 설문의견 (#{survey.numComment})
+  table.table
+    tr
+      th 질문유형
+      th content
+      th time
+    each comment in comments
+      tr
+        case comment.type
+          when 객관식
+            td 객관식
+          when 주관식
+            td 주관식
+          when 단답
+            td 단답
+        td #{comment.type}
+        td
+          input(type='text')
+        td= moment(survey.createdAt).format('YYYY-MM-DD HH:mm:ss')
+              
+  form.form-inline(action='/survey/' + survey._id + '/comments', method='POST')
+    .form-group
+      select.form-control(name='type')
+        option(value="객관식") 객관식
+        option(value="주관식") 주관식
+        option(value="단답") 단답
+    button.btn.btn-info 의견저장
+  //  a.btn.btn-default(href='/models/comments/#{survey._id}?_method=DELETE') 삭제
+    
+  hr
+  a.btn.btn-default(href='/survey') 목록 
+  

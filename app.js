@@ -13,8 +13,6 @@ var configAuth = require('./config/auth');
 
 var routes = require('./routes/index'),
     users = require('./routes/users'),
-    todos = require('./routes/todos'),
-    tasks = require('./routes/tasks'),
     survey = require('./routes/survey');
 var routeAuth = require('./routes/auth');
 
@@ -29,7 +27,7 @@ if (app.get('env') === 'development') {
 app.locals.moment = require('moment');
 
 // mongodb connect
-mongoose.connect(' mongodb://mk:<dbpassword>@ds053194.mongolab.com:53194/survey');
+mongoose.connect('mongodb://mk:12345@ds053194.mongolab.com:53194/survey');
 mongoose.connection.on('error', console.log);
 
 // uncomment after placing your favicon in /public
@@ -63,8 +61,6 @@ configAuth(passport);
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/todos', todos);
-app.use('/tasks', tasks);
 app.use('/survey', survey);
 routeAuth(app, passport);
 

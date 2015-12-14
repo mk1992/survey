@@ -21,8 +21,9 @@ html(lang='ko')
           .container
             .alert(class='alert-#{type}')
               each msg in texts
-                p= msg           
-      block content
+                p= msg
+      .container                     
+        block content
 
     block footer
       include ./includes/footer
